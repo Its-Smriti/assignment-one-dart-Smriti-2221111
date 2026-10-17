@@ -31,13 +31,14 @@ abstract class Vehicle {
 
   // Concrete method
   void displayInfo() {
+    print("Vehicle Info: $year $brand $model");
     // TODO: Display vehicle information
   }
 
   // Add a method to calculate vehicle age (current year - vehicle year)
   int calculateAge() {
     // TODO: Calculate and return vehicle age
-    return 0;
+    return DateTime.now().year - year;
   }
 }
 
@@ -49,20 +50,23 @@ class Car extends Vehicle {
   int numberOfDoors;
 
   Car(String brand, String model, int year, this.numberOfDoors)
-      : super(brand, model, year);
+    : super(brand, model, year);
 
   @override
   void start() {
+    print("Starting the car engine...");
     // TODO: Implement car start method
   }
 
   @override
   void stop() {
+    print("Stopping the car engine...");
     // TODO: Implement car stop method
   }
 
   @override
   void displayInfo() {
+    print("Vehicle Info: $year $brand $model ($numberOfDoors doors)");
     // TODO: Override to show car-specific info as shown in expected output
   }
 }
@@ -74,29 +78,43 @@ class Motorcycle extends Vehicle {
   bool hasWindshield;
 
   Motorcycle(String brand, String model, int year, this.hasWindshield)
-      : super(brand, model, year);
+    : super(brand, model, year);
 
   @override
   void start() {
+    print("Starting the motorcycle engine...");
     // TODO: Implement motorcycle start method
   }
 
   @override
   void stop() {
+    print("Stopping the motorcycle engine...");
     // TODO: Implement motorcycle stop method
   }
 
   @override
   void displayInfo() {
+    print("Vehicle Info: $year $brand $model (Has windshield: $hasWindshield)");
     // TODO: Override to show motorcycle-specific info as shown in expected output
   }
 }
 
 void main() {
   // 3. Create a list of vehicles and demonstrate polymorphism by calling start(), stop(), and displayInfo() on each vehicle
+  Car car = Car("Toyota", "Camry", 2020, 4);
+  Motorcycle motorcycle = Motorcycle("Honda", "CBR", 2021, true);
   // TODO: Create a list containing one Car and one Motorcycle
+  List<Vehicle> vehicles = [car, motorcycle];
 
   // TODO: Loop through the list and call displayInfo(), start(), and stop()
+  for (var vehicle in vehicles) {
+    vehicle.displayInfo();
+    vehicle.start();
+    vehicle.stop();
+    print(""); // For better readability in output
+  }
 
   // TODO: Print the age of each vehicle using calculateAge()
+  print("Car age: ${car.calculateAge()} years");
+  print("Motorcycle age: ${motorcycle.calculateAge()} years");
 }
